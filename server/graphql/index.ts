@@ -1,12 +1,9 @@
-import admin from "./admin";
+import message from "./message";
 
 const defaultTypeDefs = `
   type Query
   type Mutation
 `;
 
-export const typeDefs = [defaultTypeDefs, admin.types];
-export const resolvers = [admin.resolvers];
-
-// export  typeDefs;
-// export  resolvers;
+export const typeDefs = [defaultTypeDefs, message.types];
+export const resolvers = [message.resolvers];
