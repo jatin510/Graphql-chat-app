@@ -1,6 +1,5 @@
 const messages: any = [
   {
-    id: "ddsfds",
     user: "jatin",
     content: "jatin",
   },
@@ -8,6 +7,9 @@ const messages: any = [
 
 export default {
   Query: {
+    messages: () => messages,
+  },
+  Mutation: {
     message: () => messages,
   },
 };

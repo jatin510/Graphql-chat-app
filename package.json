@@ -1,15 +1,18 @@
 {
   "name": "realtime-chat-graphql",
   "version": "1.0.0",
-  "main": "server/server.js",
+  "main": "index.ts",
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "dev": "npx kill-port 4000 && ts-node-dev --respawn server/server.ts",
-    "start": "nodemon --exec ts-node server/server.ts"
+    "dev": "npx kill-port 4000 && ts-node-dev --respawn index.ts",
+    "start": "nodemon --exec ts-node index.ts"
   },
   "dependencies": {
+    "apollo-server-express": "^2.24.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "graphql-yoga": "^1.18.3"
   },
   "devDependencies": {

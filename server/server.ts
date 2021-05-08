@@ -1,19 +1,16 @@
-import { GraphQLServer } from "graphql-yoga";
-import { typeDefs, resolvers } from "./graphql";
+import express from "express";
+import cors from "cors";
+import server from "./graphql/server";
 
-// const typeDefs = `
-// type Query{
-//   hello(name : String) : String!
-// }`;
+const app = express();
 
-// const resolvers = {
-//   Query: {
-//     hello: (_: any, { name }: any) => `Hello ${name || "World"}`,
-//   },
-// };
+app.use(cors());
 
-const server = new GraphQLServer({ typeDefs, resolvers });
-
-server.start(({ port }: any) => {
-  console.log(`Server started on http://localhost:${port}`);
+app.get("/test", (req, res) => {
+  console.log("hello");
+  res.send("hello");
 });
+
+server.applyMiddleware({ app, path: "/graphql" });
+
+module.exports = app;
