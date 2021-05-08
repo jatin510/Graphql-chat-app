@@ -7,12 +7,17 @@ const types = gql`
     content: String!
   }
 
+  type PostMessageReturnType {
+    id: String
+    message: Message
+  }
+
   extend type Query {
     messages: [Message!]
   }
 
   extend type Mutation {
-    message: [Message!]
+    postMessage(user: String!, content: String!): PostMessageReturnType
   }
 `;
 
