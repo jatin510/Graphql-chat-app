@@ -1,5 +1,8 @@
-const types = `
+import { gql } from "apollo-server-express";
+
+const types = gql`
   type Message {
+    id: ID
     user: String!
     content: String!
   }
@@ -8,8 +11,8 @@ const types = `
     messages: [Message!]
   }
 
-  extend type Mutation{
-    message : [Message!]
+  extend type Mutation {
+    message: [Message!]
   }
 `;
 

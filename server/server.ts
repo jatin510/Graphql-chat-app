@@ -13,4 +13,5 @@ app.get("/test", (req, res) => {
 
 server.applyMiddleware({ app, path: "/graphql" });
 
-module.exports = app;
+const port: number = 4000;
+app.listen(port, () => console.log(`App running in port ${port}`));

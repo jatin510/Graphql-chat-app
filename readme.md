@@ -5,4 +5,4 @@
 - install all the dependencies
   `yarn install`
 - Run using dev mode
-  `yarn test`
+  `yarn dev`
