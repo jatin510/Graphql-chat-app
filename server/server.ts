@@ -1,17 +1,30 @@
 import express from "express";
 import cors from "cors";
 import server from "./graphql/server";
+import http from "http";
 
-const app = express();
+async function startApolloServer() {
+  const PORT: number = 4000;
+  const app = express();
 
-app.use(cors());
+  app.use(cors());
 
-app.get("/test", (req, res) => {
-  console.log("hello");
-  res.send("hello");
-});
+  app.get("/test", (req, res) => {
+    console.log("hello");
+    res.send("hello");
+  });
 
-server.applyMiddleware({ app, path: "/graphql" });
+  console.log(server);
+  server.applyMiddleware({ app, path: "/graphql" });
 
-const port: number = 4000;
-app.listen(port, () => console.log(`App running in port ${port}`));
+  const httpServer = http.createServer(app);
+  server.installSubscriptionHandlers(httpServer);
+
+  console.log(
+    `🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`
+  );
+
+  app.listen(PORT, () => console.log(`App running in port ${PORT}`));
+}
+
+startApolloServer();
