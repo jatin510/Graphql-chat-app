@@ -20,10 +20,13 @@ async function startApolloServer() {
   server.installSubscriptionHandlers(httpServer);
 
   console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  );
+  console.log(
     `🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`
   );
 
-  app.listen(PORT, () => console.log(`App running in port ${PORT}`));
+  httpServer.listen(PORT, () => console.log(`App running in port ${PORT}`));
 }
 
 startApolloServer();
