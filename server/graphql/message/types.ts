@@ -19,6 +19,10 @@ const types = gql`
   extend type Mutation {
     postMessage(user: String!, content: String!): PostMessageReturnType
   }
+
+  extend type Subscription {
+    messages: [Message!]
+  }
 `;
 
 export default types;
