@@ -20,7 +20,6 @@ export default {
   },
   Mutation: {
     postMessage: (_parent: any, args: PostMessage, context: any) => {
-      console.log(context.pubSub);
       const { content, user } = args;
       const id: string = messages.length;
 

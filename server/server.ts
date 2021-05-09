@@ -14,7 +14,6 @@ async function startApolloServer() {
     res.send("hello");
   });
 
-  console.log(server);
   server.applyMiddleware({ app, path: "/graphql" });
 
   const httpServer = http.createServer(app);
