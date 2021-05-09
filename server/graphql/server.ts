@@ -12,12 +12,21 @@ const typeDefs: any = [defaultTypeDefs, message.types];
 
 const resolvers: any = [message.resolvers];
 
-const pubsub = new PubSub();
+const pubSub = new PubSub();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: { pubsub },
+  subscriptions: {
+    path: "/subscriptions",
+    onConnect: (connectionParams, webSocket, context) => {
+      console.log("Client connected");
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log("Client disconnected");
+    },
+  },
+  context: { pubSub },
 });
 
 export default server;

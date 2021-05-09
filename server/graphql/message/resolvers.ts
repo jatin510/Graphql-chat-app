@@ -11,7 +11,7 @@ interface Message {
   id: string;
 }
 
-const subscribers = [];
+const subscribers: any = [];
 const onMessageUpdates = (fn: any) => subscribers.push(fn);
 
 export default {
@@ -19,7 +19,8 @@ export default {
     messages: () => messages,
   },
   Mutation: {
-    postMessage: (_parent: any, args: PostMessage) => {
+    postMessage: (_parent: any, args: PostMessage, context: any) => {
+      console.log(context.pubSub);
       const { content, user } = args;
       const id: string = messages.length;
 
@@ -29,7 +30,7 @@ export default {
         id,
       };
       messages.push(newMessage);
-
+      subscribers.forEach((fn: any) => fn());
       return { id: id, message: newMessage };
     },
   },
@@ -37,12 +38,12 @@ export default {
   Subscription: {
     messages: {
       subscribe: (_parent: any, _args: any, context: any) => {
-        const { pubsub } = context;
+        const { pubSub } = context;
         const channel = Math.random().toString(36).slice(2, 15);
 
-        onMessageUpdates(() => pubsub.publish(channel, { messages }));
-        setTimeout(() => pubsub.publish(channel, { messages }));
-        return pubsub.asyncIterator(channel);
+        onMessageUpdates(() => pubSub.publish(channel, { messages }));
+        setTimeout(() => pubSub.publish(channel, { messages }));
+        return pubSub.asyncIterator(channel);
       },
     },
   },
